@@ -1,6 +1,6 @@
 package dao;
 
-// クラス番号用のDaoです
+// クラス番号用のDao
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
