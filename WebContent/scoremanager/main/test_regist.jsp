@@ -33,7 +33,11 @@ pageEncoding="UTF-8"%>
 						<select class="form-select" id="student-f2-select" name="f2">
 							<option value="0">--------</option>
 							<c:forEach var="num" items="${class_num_set}">
+<<<<<<< HEAD
 								<%--現在のnumと選択されていたF2が一致していた場合 selectedを追記 ---%>
+=======
+								<%--現在のnumと選択されていたF2が一致していた場合 selectedを追記 --%>
+>>>>>>> branch 'me' of https://github.com/bird8103/Exam.git
 								<option value="${num}" <c:if test="${num==f2}">selected</c:if>>${num}</option>
 							</c:forEach>
 						</select>

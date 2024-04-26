@@ -25,7 +25,11 @@ public class TestRegistExecuteAction extends Action {
 //		List<Test>  testScore = null;
 
 
+<<<<<<< HEAD
 //		入力された値が正しくない場合[0～100の範囲で入力してください]と表示 -
+=======
+//		入力された値が正しくない場合[0～100の範囲で入力してください]と表示
+>>>>>>> branch 'me' of https://github.com/bird8103/Exam.git
 
 		List<String> PointNumSet=new ArrayList<>();
 		if (pointNum > 100 || pointNum < 0){
