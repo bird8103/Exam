@@ -15,8 +15,8 @@
     <c:param name="scripts">
         <script>
             function validateSubjectCode() {
-                var subjectCode = document.getElementById('subjects-cd-text').value;
-                var errorMessage = document.getElementById('subject-cd-error');
+                var subjectCode = document.getElementById('subject-code-text').value;
+                var errorMessage = document.getElementById('subject-code-error');
                 if (subjectCode.length < 3) {
                     errorMessage.innerHTML = '<span class="error-message" style="color: orange;">科目コードは3文字以上で入力してください。</span>';
                     return false; // フォームの送信をキャンセル
@@ -39,7 +39,7 @@
                     </c:if>
                     <div class="col-16">
                         <label class="form-label" for="subjects-cd-text">科目コード</label>
-                        <input class="form-control" type="text" placeholder="科目コードを入力してください" name="no" id="subjects-cd-text" maxlength="10" required <c:if test="${no!=null}">value="${no}"</c:if>>
+                        <input class="form-control" type="text" placeholder="科目コードを入力してください" name="no" id="subject-code-text" maxlength="10" required <c:if test="${no!=null}">value="${no}"</c:if>>
                     </div>
                     <div class="col-16 error-message" id="subject-cd-error"></div> <%-- エラーメッセージを表示する要素 --%>
 
@@ -47,14 +47,14 @@
                         <div class="col-16"><font color="FFD500">${errors.get("f2")}</font></div>
                     </c:if>
                     <div class="col-16">
-                        <label class="form-label" for="subjectst-name-text">科目名</label>
-                        <input class="form-control" type="text" placeholder="科目名を入力してください" name="name" id="subjects-name-text" maxlength="30" required <c:if test="${name!=null}">value="${name}"</c:if>>
+                        <label class="form-label" for="subject-name-text">科目名</label>
+                        <input class="form-control" type="text" placeholder="科目名を入力してください" name="name" id="subject-name-text" maxlength="30" required <c:if test="${name!=null}">value="${name}"</c:if>>
                     </div>
 
                     <div class="col-2 text-center col-1 mt-3">
                         <button class="btn btn-secondary px-1" id="end-button" name="end">登録</button>
                     </div>
-                    <a href="SubjectsList.action" class="mt-3">戻る</a>
+                    <a href="SubjectList.action" class="mt-3">戻る</a>
                 </div>
             </form>
             <%-- 重複エラーメッセージの表示 --%>

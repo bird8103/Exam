@@ -23,18 +23,18 @@
     <c:param name="content">
         <section class="me-4">
             <h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">科目情報削除</h2>
-            <form action="SubjectsDeleteExecute.action" method="get">
+            <form action="SubjectDeleteExecute.action" method="get">
                 <div class="row mx-3 mb-3 py-2 align-items-center rounded" id="filter">
                     <div class="col-16">
                         <!-- 確認メッセージ -->
                         <label for="confirmation-message"></label>
-                        <p id="confirmation-message">${selected_subject_name}  ${selected_subject_cd} を削除してもよろしいですか？？</p>
+                        <p id="confirmation-message">${selected_subject_name}  ${selected_subject_code} を削除してもよろしいですか？？</p>
                     </div>
                     <div class="col-2 text-center col-1 mt-3">
                         <!-- btn-danger クラスを追加 -->
                         <button class="btn btn-secondary px-1 btn-danger" id="end-button" name="end">削除</button>
                     </div>
-                    <a href="SubjectsList.action" class="mt-3">戻る</a>
+                    <a href="SubjectList.action" class="mt-3">戻る</a>
                 </div>
             </form>
         </section>
