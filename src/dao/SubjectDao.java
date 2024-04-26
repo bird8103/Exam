@@ -10,17 +10,8 @@
 
 
 
-/*
- *
- *
- * StudentDaoの機能はdeleteメソッドが存在する関係上、論理削除フラグのカラムを使用します
- * 論理削除フラグがまだ存在しないなら、以下のSQL文をH2で実行してから動作確認をお願いします
- *
- * ALTER TABLE SUBJECT ADD EXISTING boolean DEFAULT TRUE
- *
- *
- */
 
+// ★エラーが起こる場合★   StudentDaoの機能は論理削除方式のdeleteメソッドが存在する関係上、論理削除フラグのカラムを使用します。論理削除フラグがまだ存在しないなら、次のSQL文をH2で実行してから動作させてください→ ALTER TABLE SUBJECT ADD EXISTING boolean DEFAULT TRUE      ;
 
 
 
@@ -55,13 +46,13 @@ public class SubjectDao extends Dao{
 
 		try{
 			// プリペアードステートメントにSQLをセット
-			statement=connection.prepareStatement("select * from subject where cd=?");
+			statement=connection.prepareStatement("select * from subject where cd=? and school_cd=?");
 			// プリペアードステートメントに科目IDをバインド
 			statement.setString(1, cd);
+			statement.setString(2, school.getCd());
 			// プリペアードステートメントを実行
 			ResultSet rSet=statement.executeQuery();
 			// 学校Daoを初期化
-			SchoolDao schoolDao = new SchoolDao();
 
 			if (rSet.next()){
 				// リザルトセットが存在する場合、
