@@ -77,11 +77,7 @@ public class TestRegistAction extends Action {
 		boolean deployment = false;
 		Map<String,String> errors = new HashMap<>(); // エラーメッセージ
 
-<<<<<<< HEAD
-//		入力値の確認 -
-=======
 //		入力値の確認
->>>>>>> branch 'me' of https://github.com/bird8103/Exam.git
 		// リクエストパラメータの取得 要るかわからん
 		entYearStr=req.getParameter("f1");
 		classNum=req.getParameter("f2");
