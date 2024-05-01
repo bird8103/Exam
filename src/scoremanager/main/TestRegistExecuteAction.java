@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.Teacher;
+import bean.Test;
 import tool.Action;
 
 public class TestRegistExecuteAction extends Action {
@@ -21,28 +22,38 @@ public class TestRegistExecuteAction extends Action {
 
 		String pointNumStr="";
 		int pointNum=0;
-		Map<String,String> errors = new HashMap<>();
-		// エラーメッセージ
-//		List<Test>  testScore = null;
+		Map<String,String> errors = new HashMap<>();// エラーメッセージ
+//		TestDao testDao = new TestDao();
 
-//		入力された値が正しくない場合[0～100の範囲で入力してください]と表示
-//github.com/bird8103/Exam.git
-
+		List<Test>  testScore = null;
 		List<String> PointNumSet=new ArrayList<>();
-		if (pointNum > 100 || pointNum < 0){
-			errors.put("point","0～100の範囲で入力してください");
-			req.setAttribute("errors", errors);
-		}
-		else if(pointNum != 0){
-
-		}
-
-//		入力された値をDBに保存する
 
 
+        try {
+        	pointNumStr = req.getParameter("test-num");
+            pointNum = Integer.parseInt(pointNumStr);//[102]
+//    		入力された値が正しくない場合[0～100の範囲で入力してください]と表示
 
-//		jspを表示
-		req.getRequestDispatcher("test_regist_done.jsp").forward(req, res);;
+    		if (pointNum < 100 || pointNum < 0){
+    			errors.put("point","0～100の範囲で入力してください");
+    			req.setAttribute("errors", errors);
+    		}
+//    		else if(pointNum = null){
+//
+//    		}
+    		else{
+
+//    			入力された値をDBに保存する
+//    			testDao.save(testScore);
+    		}
+
+//    		jspを表示
+    		req.getRequestDispatcher("test_regist_done.jsp").forward(req, res);
+
+        } catch (NumberFormatException numberFormatException) {
+    		errors.put("point","0～100の範囲で入力してください");
+    		req.setAttribute("errors", errors);
+
+    	}
 	}
-
 }

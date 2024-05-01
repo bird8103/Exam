@@ -33,11 +33,7 @@ pageEncoding="UTF-8"%>
 						<select class="form-select" id="student-f2-select" name="f2">
 							<option value="0">--------</option>
 							<c:forEach var="num" items="${class_num_set}">
-<<<<<<< HEAD
 								<%--現在のnumと選択されていたF2が一致していた場合 selectedを追記 ---%>
-=======
-								<%--現在のnumと選択されていたF2が一致していた場合 selectedを追記 --%>
->>>>>>> branch 'me' of https://github.com/bird8103/Exam.git
 								<option value="${num}" <c:if test="${num==f2}">selected</c:if>>${num}</option>
 							</c:forEach>
 						</select>
@@ -71,18 +67,18 @@ pageEncoding="UTF-8"%>
 				</div>
 			</form>
 <!-- 検索結果 -->
-<!-- 			<c:choose>
+ 			<c:choose>
 					<c:when test="${dep == true}">
-						<div>科目 :${f3} : (:${f4}回)</div>
+						<div>科目 :${subject_name} : (:${test_no}回)</div>
 						<table class="table table-hover">
 							<tr>
 								<th>入学年度</th>
 								<th>学生番号</th>
 								<th>氏名</th>
 								<th>クラス </th>
-								<th><label class="form-label" for="test-num">点数</label></th>
+								<th><label class="form-label" for="point">点数</label></th>
 							</tr>
-							<c:forEach var="student" items="${students_score}">
+							<c:forEach var="students" items="${students}">
 							<tr>
 								<td>${student.entYear}</td>
 								<td>${student.no}</td>
@@ -90,7 +86,7 @@ pageEncoding="UTF-8"%>
 								<td>${student.classNum}</td>
 								<td>
 									<div class="col-6">
-										<input class="form-control" type="text" name="point_${num}" id="test-num" maxlength="3" required >
+										<input class="form-control" type="text" name="point_${num}" id="point" maxlength="3" required >
 									</div>
 									<c:if test="${errors.get(\"point\")!}"><div class="col-16"><font color="FFD500">${errors.get("point")}</font></div></c:if>
 								</td>
@@ -98,10 +94,10 @@ pageEncoding="UTF-8"%>
 						</c:forEach>
 					</table>
 					<div class="col-2 text-center">
-					<button class="btn btn-secondary" id="exe-button"><a href="TestRegistExecute.action">保存して終了</a></button>
+					<button class="btn btn-secondary" id="exe-button">保存して終了</button>
 					</div>
 				</c:when>
-			</c:choose> -->
+			</c:choose>
 		</section>
 	</c:param>
 </c:import>
