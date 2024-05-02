@@ -53,8 +53,9 @@
 
                     <div class="col-2 text-center col-1 mt-3">
                         <button class="btn btn-secondary px-1" id="end-button" name="end">登録</button>
+                        
                     </div>
-                    <a href="SubjectList.action" class="mt-3">戻る</a>
+                    <a href="subject_list.jsp" class="mt-3">戻る</a>
                 </div>
             </form>
             <%-- 重複エラーメッセージの表示 --%>

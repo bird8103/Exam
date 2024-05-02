@@ -18,7 +18,7 @@ pageEncoding="UTF-8"%>
 				</div>
 			</div>
 			<a href="StudentCreate.action" class="me-5">戻る</a>
-			<a href="StudentList.action">学生一覧</a>
+			<a href="subject_list.action">学生一覧</a>
 		</section>
 	</c:param>
 </c:import>

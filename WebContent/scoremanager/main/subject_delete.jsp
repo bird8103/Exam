@@ -34,7 +34,7 @@
                         <!-- btn-danger クラスを追加 -->
                         <button class="btn btn-secondary px-1 btn-danger" id="end-button" name="end">削除</button>
                     </div>
-                    <a href="SubjectList.action" class="mt-3">戻る</a>
+                    <a href="subjct_list.jsp" class="mt-3">戻る</a>
                 </div>
             </form>
         </section>
