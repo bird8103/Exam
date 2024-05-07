@@ -27,7 +27,7 @@ public class SubjectDeleteAction extends Action{
 
 		// リクエストパラメータのセット
 		req.setAttribute("selected_subject_name", thisSubject.getName());
-		req.setAttribute("selected_subject_cd", thisSubject.getCd());
+		req.setAttribute("selected_subject_code", thisSubject.getCd());
 		// フォワード
 		req.getRequestDispatcher("subjects_delete.jsp").forward(req, res);
 	}
