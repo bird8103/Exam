@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Test implements Serializable {
 
-	//生徒名
+	//生徒名,
 	private Student student;
 
 	//クラスコード
