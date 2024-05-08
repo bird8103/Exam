@@ -16,19 +16,15 @@ public class TestRegistExecuteAction extends Action {
 	@SuppressWarnings({ "null", "unchecked" })
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-//		HttpSession session = req.getSession(); // セッション
-//		Teacher teacher =(Teacher)session.getAttribute("user");
-
 		String pointNumStr="";
 		int pointNum=0;
 		Map<String,String> errors = new HashMap<>();// エラーメッセージ
 		TestDao testDao = new TestDao();
-//		StudentDao studentDao = new StudentDao();
 		boolean pointNull = false;
-//		Test test = new Test();
 
 		List<Test>  testScore = null; //更新・追加用
 		List<Test> students = null;   //受信用
+
         try {
 //        	studentsに検索結果に応じたtestを保存
         	students = (List<Test>)req.getAttribute("test_result");
@@ -37,7 +33,7 @@ public class TestRegistExecuteAction extends Action {
             	pointNumStr = req.getParameter("point_" + test.getNo());
 
         		if(pointNumStr != null){
-                    pointNum = Integer.parseInt(pointNumStr);//[102]
+                    pointNum = Integer.parseInt(pointNumStr);
         		} else {
         			pointNull = true;
         		}
@@ -61,8 +57,10 @@ public class TestRegistExecuteAction extends Action {
 
 //        	入力された値のリストをまとめてDBに保存する
         	if(testDao.save(testScore) == true){
+//        		保存できた場合完了画面に遷移
             	req.getRequestDispatcher("test_regist_done.jsp").forward(req, res);
         	} else{
+//        		できなかった場合は遷移しない
               	req.getRequestDispatcher("test_regist.jsp").forward(req, res);
         	}
 
