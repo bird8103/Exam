@@ -226,6 +226,7 @@ public class SubjectDao extends Dao{
 				// プリペアードステートメントに論理削除文をセット
 				statement=connection.prepareStatement("update subject set existing=? where cd=?");
 				statement.setBoolean(1,false);
+				statement.setString(2,subject.getCd());
 			}
 			// プリペアードステートメントを実行
 			// 戻り値として更新した件数が変数countに入る
