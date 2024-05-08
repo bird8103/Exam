@@ -48,7 +48,7 @@
                     </c:if>
                     <div class="col-16">
                         <label class="form-label" for="subject-name-text">科目名</label>
-                        <input class="form-control" type="text" placeholder="科目名を入力してください" name="name" id="subject-name-text" maxlength="30" required <c:if test="${name!=null}">value="${name}"</c:if>>
+                        <input class="form-control" type="text" placeholder="科目名を入力してください" name="subject_name" id="subject-name-text" maxlength="30" required <c:if test="${name!=null}">value="${name}"</c:if>>
                     </div>
 
                     <div class="col-2 text-center col-1 mt-3">
