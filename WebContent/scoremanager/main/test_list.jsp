@@ -74,7 +74,6 @@ pageEncoding="UTF-8"%>
 							<c:if test="${name!=null}">value="${f4}"</c:if>></div>
 
 
-
 					</div>
 <div class="col-2"><input type="submit" name="STU_GET" value="検索"></div>
 

@@ -123,6 +123,7 @@ pageEncoding="UTF-8"%>
 								<td>${points}</td>
 
 
+
 							</tr>
 						</c:forEach>
 					</table>
