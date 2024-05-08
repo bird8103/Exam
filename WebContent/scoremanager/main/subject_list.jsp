@@ -30,7 +30,7 @@
 
 			</form>
 			<c:choose>
-				<c:when test="${subject.size()!=0}">
+				<c:when test="${subjects.size()!=0}">
 
 					<table class="table table-hover">
 						<tr>
@@ -39,15 +39,15 @@
 							<th></th>
 							<th></th>
 						</tr>
-						<c:forEach var="subject" items="${subject}">
+						<c:forEach var="subject" items="${subjects}">
 							<tr>
-								<td>${subject.code}</td>
+								<td>${subject.cd}</td>
 								<td>${subject.name}</td>
 
 								<td class="text-center">
 
-								<td><a href="subject_update.jsp?no=${subject.no}">変更</a></td>
-								<td><a href="subject_delete.jsp?no=${subject.no}">削除</a></td>
+								<td><a href="subject_update.jsp?no=${subject.cd}">変更</a></td>
+								<td><a href="subject_delete.jsp?no=${subject.cd}">削除</a></td>
 							</tr>
 						</c:forEach>
 					</table>
