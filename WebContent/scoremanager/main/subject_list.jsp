@@ -47,7 +47,7 @@
 								<td class="text-center">
 
 								<td><a href="subject_update.jsp?no=${subject.cd}">変更</a></td>
-								<td><a href="subject_delete.jsp?no=${subject.cd}">削除</a></td>
+								<td><a href="SubjectDelete.action?no=${subject.cd}">削除</a></td>
 							</tr>
 						</c:forEach>
 					</table>
