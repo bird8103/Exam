@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bean.Student;
+import bean.TestListStudent;
 
 
 public class TestListStudentDao extends Dao{
@@ -21,8 +22,8 @@ public class TestListStudentDao extends Dao{
 			// リザルトセットを全権走査
 			while(rSet.next()){
 				TestListStudent testliststudent = new TestListStudent();
-				testliststudent.setSubjectName(subDao.get(rSet.getString("subject_cd"), schDao.get(rSet.getString("school_cd"))).getName());
-				testliststudent.setSubjectCd(rSet.getString("subject_cd"));
+				testliststudent.setSbjectName(subDao.get(rSet.getString("subject_cd"), schDao.get(rSet.getString("school_cd"))).getName());
+				testliststudent.setSbjectCd(rSet.getString("subject_cd"));
 				testliststudent.setNum(rSet.getInt("no"));
 				testliststudent.setPoint(rSet.getInt("point"));
 				//リストに追加
