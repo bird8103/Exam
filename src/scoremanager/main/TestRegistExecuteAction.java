@@ -13,7 +13,7 @@ import tool.Action;
 
 public class TestRegistExecuteAction extends Action {
 
-	@SuppressWarnings("null")
+	@SuppressWarnings({ "null", "unchecked" })
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 //		HttpSession session = req.getSession(); // セッション
@@ -27,10 +27,12 @@ public class TestRegistExecuteAction extends Action {
 		boolean pointNull = false;
 //		Test test = new Test();
 
-		List<Test>  testScore = null; //送信用
+		List<Test>  testScore = null; //更新・追加用
 		List<Test> students = null;   //受信用
         try {
-
+//        	studentsに検索結果に応じたtestを保存
+        	students = (List<Test>)req.getAttribute("test_result");
+//        	1件ごとに処理
         	for (Test test : students){
             	pointNumStr = req.getParameter("point_" + test.getNo());
 
@@ -41,7 +43,7 @@ public class TestRegistExecuteAction extends Action {
         		}
 
 //        		入力された値が正しくない場合[0～100の範囲で入力してください]と表示
-            	if (pointNum < 100 || pointNum < 0){
+            	if (pointNum < 100 && pointNull == false || pointNum < 0 && pointNull == false){
             		errors.put("point","0～100の範囲で入力してください");
             		req.setAttribute("errors", errors);
             	} else{
@@ -50,20 +52,21 @@ public class TestRegistExecuteAction extends Action {
             		((Test) testScore).setSubject(test.getSubject());
             		((Test) testScore).setSchool(test.getSchool());
             		((Test) testScore).setNo(test.getNo());
+//            		得点が入力されていた場合のみ
             		if(pointNull == false){
                 		((Test) testScore).setPoint(pointNum);
             		}
             	}
         	}
 
-//        			入力された値をDBに保存する
+//        	入力された値のリストをまとめてDBに保存する
         	if(testDao.save(testScore) == true){
             	req.getRequestDispatcher("test_regist_done.jsp").forward(req, res);
         	} else{
               	req.getRequestDispatcher("test_regist.jsp").forward(req, res);
         	}
 
-
+//			数字以外が入力された場合
         } catch (NumberFormatException numberFormatException) {
     		errors.put("point","0～100の範囲で入力してください");
     		req.setAttribute("errors", errors);

@@ -94,6 +94,7 @@ public class TestRegistAction extends Action {
 			test = testDao.filter(entYear, classNum, subject, num, teacher.getSchool());
 			students = ((Test) test).getStudent();
 		// レスポンス値セット
+			req.setAttribute("test_result", test);
 			req.setAttribute("subject_name", subject);
 			req.setAttribute("test_no", num);
 			req.setAttribute("students", students);
