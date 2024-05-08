@@ -36,8 +36,8 @@
                                 <p class="text-center">登録が完了しました</p>
                             </div>
                         </div>
-                        <a href="SubjectsCreate.action" class="me-5">戻る</a>
-                        <a href="SubjectsList.action">科目一覧</a>
+                        <a href="SubjectCreate.action" class="me-5">戻る</a>
+                        <a href="SubjectList.action">科目一覧</a>
                     </section>
                 </c:param>
             </c:import>

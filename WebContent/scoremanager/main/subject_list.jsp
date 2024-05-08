@@ -19,7 +19,7 @@
 		<section class="me-4">
 			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">科目管理</h2>
 			<div class="my-2 text-end px-4">
-				<a href="SubjectsCreate.action">新規登録</a>
+				<a href="subject_create.jsp">新規登録</a>
 			</div>
 			<form method="get">
 
@@ -30,7 +30,7 @@
 
 			</form>
 			<c:choose>
-				<c:when test="${subjects.size()!=0}">
+				<c:when test="${subject.size()!=0}">
 
 					<table class="table table-hover">
 						<tr>
@@ -39,15 +39,15 @@
 							<th></th>
 							<th></th>
 						</tr>
-						<c:forEach var="subjects" items="${subjects}">
+						<c:forEach var="subject" items="${subject}">
 							<tr>
-								<td>${subjects.code}</td>
-								<td>${subjects.name}</td>
+								<td>${subject.code}</td>
+								<td>${subject.name}</td>
 
 								<td class="text-center">
 
-								<td><a href="SubjectstUpdate.action?no=${subjects.no}">変更</a></td>
-								<td><a href="SubjectsDelete.action?no=${subjects.no}">削除</a></td>
+								<td><a href="subject_update.jsp?no=${subject.no}">変更</a></td>
+								<td><a href="subject_delete.jsp?no=${subject.no}">削除</a></td>
 							</tr>
 						</c:forEach>
 					</table>
@@ -65,4 +65,3 @@
 
 
 
-	
