@@ -39,13 +39,13 @@ pageEncoding="UTF-8"%>
 						</select>
 					</div>
 					<div class="col-4">
-						<label class="form-select" for="student-f3-select">科目</label>
+						<label class="form-label" for="student-f3-select">科目</label>
 							<%--パラメーターf3が存在している場合 checkedを追記--%>
 						<select class="form-select" id="student-f3-select" name="f3">
 							<option value="0">--------</option>
-							<c:forEach var="subject.cd" items="${subject_set}">
+							<c:forEach var="subject" items="${subject_set}">
 								<%--現在のsubject.cdと選択されていたF3が一致していた場合 selectedを追記--%>
-								<option value="${subject.cd}" <c:if test="${subject.cd==f3}">selected</c:if>>${subject.cd}</option>
+								<option value="${subject.cd}" <c:if test="${subject.cd==f3}">selected</c:if>>${subject.name}</option>
 							</c:forEach>
 						</select>
 					</div>
@@ -53,7 +53,7 @@ pageEncoding="UTF-8"%>
 						<label class="form-label" for="student-f4-select">回数</label>
 						<select class="form-select" id="student-f4-select" name="f4">
 							<option value="0">--------</option>
-							<c:forEach var="num" items="${num_of_time_set}">
+							<c:forEach var="num" items="${num_set}">
 								<%--現在のnumと選択されていたF4が一致していた場合 selectedを追記--%>
 								<option value="${num}" <c:if test="${num==f4}">selected</c:if>>${num}</option>
 							</c:forEach>

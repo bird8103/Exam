@@ -35,12 +35,6 @@ public class TestRegistAction extends Action {
 		List<Subject> subjectList=subjectDao.filter(teacher.getSchool());
 
 		List<Integer> numSet= new ArrayList<>();
-
-		String entYearStr ="";
-		String classNum ="";
-		String subjectName ="";
-		String numOfTime="";
-
 		for (int i = 1; i < 101; i++){
 			numSet.add(i);
 		}
