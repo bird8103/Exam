@@ -88,7 +88,7 @@ pageEncoding="UTF-8"%>
 									<div class="col-6">
 										<input class="form-control" type="text" name="point_${student.no}" id="point" maxlength="3" required >
 									</div>
-									<c:if test="${errors.get(\"point\")!}"><div class="col-16"><font color="FFD500">${errors.get("point")}</font></div></c:if>
+									<c:if test="${errors.get(\"point\")}"><div class="col-16"><font color="FFD500">${errors.get("point")}</font></div></c:if>
 								</td>
 							</tr>
 						</c:forEach>

@@ -35,6 +35,12 @@ public class TestRegistAction extends Action {
 		List<Subject> subjectList=subjectDao.filter(teacher.getSchool());
 
 		List<Integer> numSet= new ArrayList<>();
+
+		String entYearStr ="";
+		String classNum ="";
+		String subjectName ="";
+		String numOfTime="";
+
 		for (int i = 1; i < 101; i++){
 			numSet.add(i);
 		}
@@ -51,9 +57,14 @@ public class TestRegistAction extends Action {
 		req.setAttribute("subject_set", subjectList);
 		req.setAttribute("num_set", numSet);
 
-		// JSPへフォワード
-		req.getRequestDispatcher("student_regist.jsp").forward(req, res);
-		TestRequestData(req, res);
+//		既に何らかが入力されている場合にそれに応じた処理を行う
+		try{
+				TestRequestData(req, res);
+		} catch (NullPointerException e ){
+			req.getRequestDispatcher("test_regist.jsp").forward(req, res);
+		} catch (NumberFormatException nume){
+			req.getRequestDispatcher("test_regist.jsp").forward(req, res);
+		}
 	}
 
 	private void TestRequestData(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -103,6 +114,6 @@ public class TestRegistAction extends Action {
 			req.setAttribute("errors", errors);
 		}
 		req.setAttribute("dep", deployment);
-		req.getRequestDispatcher("student_regist.jsp").forward(req, res);
+		req.getRequestDispatcher("test_regist.jsp").forward(req, res);
 	}
 }
