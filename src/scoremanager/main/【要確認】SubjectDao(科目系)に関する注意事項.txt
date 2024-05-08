@@ -1,0 +1,6 @@
+
+	StudentDaoの機能は論理削除方式のdeleteメソッドが存在する関係上、論理削除フラグのカラムを前提に動作します。
+	下記のSQL文をH2で実行してから動作させてください
+
+          ALTER TABLE SUBJECT ADD EXISTING boolean DEFAULT TRUE
+
