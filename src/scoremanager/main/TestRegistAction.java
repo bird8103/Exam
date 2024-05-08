@@ -30,8 +30,7 @@ public class TestRegistAction extends Action {
 		int year =todaysDate.getYear(); // 現在の年を取得
 		ClassNumDao cNumDao = new ClassNumDao(); // クラス番号Dao
 		SubjectDao subjectDao = new SubjectDao(); //科目Dao
-//		TestDao testDao = new TestDao();
-//		Test test = new Test();
+
 		List<String> list=cNumDao.filter(teacher.getSchool());
 		List<Subject> subjectList=subjectDao.filter(teacher.getSchool());
 
@@ -68,17 +67,15 @@ public class TestRegistAction extends Action {
 		int entYear=0;
 		int num=0;
 		boolean deployment = false;
-//		boolean isAttend= true;
 		List<Test> test = null;
 		Student students = null;
 		Subject subject = new Subject();
 		TestDao testDao = new TestDao();
-//		StudentDao studentDao = new StudentDao();
 		SubjectDao subjectDao = new SubjectDao();
 		Map<String,String> errors = new HashMap<>(); // エラーメッセージ
 
 //		入力値の確認
-		// リクエストパラメータの取得 要るかわからん
+		// リクエストパラメータの取得
 		entYearStr=req.getParameter("f1");
 		classNum=req.getParameter("f2");
 		subjectName=req.getParameter("f3");
@@ -93,7 +90,7 @@ public class TestRegistAction extends Action {
 		// 成績管理一覧で表示するために必要なデータを取得
 			test = testDao.filter(entYear, classNum, subject, num, teacher.getSchool());
 			students = ((Test) test).getStudent();
-		// レスポンス値セット
+		// 値セット
 			req.setAttribute("test_result", test);
 			req.setAttribute("subject_name", subject);
 			req.setAttribute("test_no", num);
@@ -106,7 +103,6 @@ public class TestRegistAction extends Action {
 			req.setAttribute("errors", errors);
 		}
 		req.setAttribute("dep", deployment);
-//		ここ暫定
 		req.getRequestDispatcher("student_regist.jsp").forward(req, res);
 	}
 }
