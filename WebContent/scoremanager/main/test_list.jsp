@@ -75,7 +75,6 @@ pageEncoding="UTF-8"%>
 
 
 
-
 					</div>
 <div class="col-2"><input type="submit" name="STU_GET" value="検索"></div>
 

@@ -96,7 +96,6 @@ pageEncoding="UTF-8"%>
 
 
 
-
 					<div class="mt-2 text-warning">${errors.get("f1")}</div>
 
 
