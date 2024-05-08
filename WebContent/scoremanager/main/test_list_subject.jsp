@@ -117,9 +117,12 @@ pageEncoding="UTF-8"%>
 							<tr>
 								<td>${entYear}</td>
 								<td>${classNum}</td>
-								<td>${name}</td>
-								<td>${point}</td>
-								<td></td>
+								<td>${studentNo}</td>
+								<td>${studentName}</td>
+								<td>${points}</td>
+								<td>${points}</td>
+
+
 
 
 							</tr>
