@@ -114,6 +114,7 @@ public class SubjectCreateExecuteAction extends Action {
         HttpSession session = req.getSession(); // セッション
         Teacher teacher = (Teacher) session.getAttribute("user");
 
+
         String subjectName = ""; // 入力された科目名
         String subjectCd = ""; // 入力された科目コード
         Subject makeSubject = new Subject(); // 送信用科目情報
@@ -122,10 +123,10 @@ public class SubjectCreateExecuteAction extends Action {
 
         // リクエストパラメータの取得
         subjectName = req.getParameter("subject_name");
-        subjectCd = req.getParameter("cd");
+        subjectCd = req.getParameter("no");
 
         // 科目コード重複確認
-        Subject isSubject = sDao.get(subjectCd, null);
+        Subject isSubject = sDao.get(subjectCd, teacher.getSchool());
 
         // エラーチェック
         if (isSubject != null && subjectName.equals("0")) {
@@ -134,21 +135,21 @@ public class SubjectCreateExecuteAction extends Action {
             errors.put("f2", "科目コードが重複しています");
             req.setAttribute("errors", errors);
             req.setAttribute("no", subjectCd);
-            req.setAttribute("name", subjectName);
+            req.setAttribute("subject_name", subjectName);
             req.getRequestDispatcher("SubjectCreate.action").forward(req, res);
         } else if (subjectName.equals("0")) {
             System.out.println("★リスト未選択");
             errors.put("f1", "科目名を入力してください");
             req.setAttribute("errors", errors);
             req.setAttribute("no", subjectCd);
-            req.setAttribute("name", subjectName);
+            req.setAttribute("subject_name", subjectName);
             req.getRequestDispatcher("SubjectCreate.action").forward(req, res);
         } else if (isSubject != null) {
             System.out.println("★科目コード重複");
             errors.put("f2", "科目コードが重複しています");
             req.setAttribute("errors", errors);
             req.setAttribute("no", subjectCd);
-            req.setAttribute("name", subjectName);
+            req.setAttribute("subject_name", subjectName);
             req.getRequestDispatcher("SubjectCreate.action").forward(req, res);
         } else if (isSubject == null) {
             System.out.println("★リスト選択OK、科目コード重複無し");
@@ -164,7 +165,7 @@ public class SubjectCreateExecuteAction extends Action {
             } else {
                 System.out.println("★登録に失敗しました");
                 req.setAttribute("no", subjectCd);
-                req.setAttribute("name", subjectName);
+                req.setAttribute("subject_name", subjectName);
                 req.getRequestDispatcher("SubjectCreate.action").forward(req, res);
             }
         }

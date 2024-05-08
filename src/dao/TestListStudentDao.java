@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bean.Student;
+import bean.TestListStudent;
 
 
 public class TestListStudentDao extends Dao{

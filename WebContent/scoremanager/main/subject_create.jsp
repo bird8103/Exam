@@ -48,14 +48,14 @@
                     </c:if>
                     <div class="col-16">
                         <label class="form-label" for="subject-name-text">科目名</label>
-                        <input class="form-control" type="text" placeholder="科目名を入力してください" name="name" id="subject-name-text" maxlength="30" required <c:if test="${name!=null}">value="${name}"</c:if>>
+                        <input class="form-control" type="text" placeholder="科目名を入力してください" name="subject_name" id="subject-name-text" maxlength="30" required <c:if test="${name!=null}">value="${name}"</c:if>>
                     </div>
 
                     <div class="col-2 text-center col-1 mt-3">
                         <button class="btn btn-secondary px-1" id="end-button" name="end">登録</button>
 
                     </div>
-                    <a href="subject_list.jsp" class="mt-3">戻る</a>
+                    <a href="SubjectList.action" class="mt-3">戻る</a>
                 </div>
             </form>
             <%-- 重複エラーメッセージの表示 --%>
