@@ -29,7 +29,7 @@
 				<div class="row mx-3 mb-3 py-2 align-items-center rounded" id="filter">
 					<div class="col-16">
 						<label class="form-label" for="subject-code-text">科目コード</label>
-						<input class="form-control-plaintext ps-3" type="text" name="subject_name" id="subject-code-text" readonly value="${subject_name}">
+						<input class="form-control-plaintext ps-3" type="text" name="code" id="subject-code-text" readonly value="${code}">
 					</div>
 
 					<div class="col-16">
