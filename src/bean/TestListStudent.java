@@ -21,13 +21,13 @@ public class TestListStudent implements Serializable {
 	public String getSubjectNme(){
 		return subjectName;
 	}
-	public void setSbjectName(String subjectName){
+	public void setSubjectName(String subjectName){
 		this.subjectName=subjectName;
 	}
 	public String getSubjectCd(){
 		return subjectCd;
 	}
-	public void setSbjectCd(String subjectCd){
+	public void setSubjectCd(String subjectCd){
 		this.subjectCd=subjectCd;
 	}
 	public int getNum(){
@@ -43,6 +43,6 @@ public class TestListStudent implements Serializable {
 		this.point=point;
 	}
 	}
-	
-	
-	
+
+
+
