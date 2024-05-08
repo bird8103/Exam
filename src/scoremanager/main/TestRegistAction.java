@@ -15,8 +15,8 @@ import bean.Subject;
 import bean.Teacher;
 import bean.Test;
 import dao.ClassNumDao;
-import dao.StudentDao;
 import dao.SubjectDao;
+import dao.TestDao;
 import tool.Action;
 
 public class TestRegistAction extends Action {
@@ -31,11 +31,14 @@ public class TestRegistAction extends Action {
 		ClassNumDao cNumDao = new ClassNumDao(); // クラス番号Dao
 		SubjectDao subjectDao = new SubjectDao(); //科目Dao
 //		TestDao testDao = new TestDao();
-
+//		Test test = new Test();
 		List<String> list=cNumDao.filter(teacher.getSchool());
 		List<Subject> subjectList=subjectDao.filter(teacher.getSchool());
-//		List<String> numSet=testDao.filter(teacher.getSchool(), subject);
 
+		List<Integer> numSet= new ArrayList<>();
+		for (int i = 1; i < 101; i++){
+			numSet.add(i);
+		}
 		// リストを初期化
 		List<Integer> entYearSet=new ArrayList<>();
 		// 10年前から1年後までの年をリストに追加
@@ -47,7 +50,7 @@ public class TestRegistAction extends Action {
 		req.setAttribute("class_num_set", list);
 		req.setAttribute("ent_year_set", entYearSet);
 		req.setAttribute("subject_set", subjectList);
-//		req.setAttribute("num_set", numSet);
+		req.setAttribute("num_set", numSet);
 
 		// JSPへフォワード
 		req.getRequestDispatcher("student_regist.jsp").forward(req, res);
@@ -60,31 +63,39 @@ public class TestRegistAction extends Action {
 
 		String entYearStr ="";
 		String classNum ="";
-		String subject ="";
+		String subjectName ="";
 		String numOfTime="";
 		int entYear=0;
+		int num=0;
 		boolean deployment = false;
+//		boolean isAttend= true;
 		List<Test> test = null;
-		List<Student> students = null;
-//		TestDao testDao = new testDao();
-		StudentDao studentDao = new StudentDao();
+		Student students = null;
+		Subject subject = new Subject();
+		TestDao testDao = new TestDao();
+//		StudentDao studentDao = new StudentDao();
+		SubjectDao subjectDao = new SubjectDao();
 		Map<String,String> errors = new HashMap<>(); // エラーメッセージ
 
 //		入力値の確認
 		// リクエストパラメータの取得 要るかわからん
 		entYearStr=req.getParameter("f1");
 		classNum=req.getParameter("f2");
-		subject=req.getParameter("f3");
+		subjectName=req.getParameter("f3");
 		numOfTime=req.getParameter("f4");
+
+//		入力値の型変換
 		entYear=Integer.parseInt(entYearStr);
+		num=Integer.parseInt(numOfTime);
+		subject=subjectDao.get(subjectName, teacher.getSchool());
 
 		if (entYearStr != null && !classNum.equals("0") && subject != null && !numOfTime.equals("0")){
 		// 成績管理一覧で表示するために必要なデータを取得
-//			test = testDao.filter(entYear, classNum, subject, numOfTime, teacher.getSchool());
-//			students = studentDao.get();
+			test = testDao.filter(entYear, classNum, subject, num, teacher.getSchool());
+			students = ((Test) test).getStudent();
 		// レスポンス値セット
 			req.setAttribute("subject_name", subject);
-			req.setAttribute("test_no", numOfTime);
+			req.setAttribute("test_no", num);
 			req.setAttribute("students", students);
 			deployment = true;
 		}
