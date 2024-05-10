@@ -32,7 +32,7 @@
                     </div>
                     <div class="col-2 text-center col-1 mt-3">
                         <!-- btn-danger クラスを追加 -->
-                        <button class="btn btn-secondary px-1 btn-danger" id="end-button" name="end">削除</button>
+                        <button class="btn btn-secondary px-1 btn-danger" id="end-button" name="selected_subject_code" value="${selected_subject_code}">削除</button>
                     </div>
                     <a href="SubjectList.action" class="mt-3">戻る</a>
                 </div>
