@@ -122,8 +122,8 @@ public class SubjectCreateExecuteAction extends Action {
         Map<String, String> errors = new HashMap<>(); // エラーメッセージ
 
         // リクエストパラメータの取得
-        subjectName = req.getParameter("subject_name");
-        subjectCd = req.getParameter("no");
+        subjectName = req.getParameter("name");
+        subjectCd = req.getParameter("cd");
 
         // 科目コード重複確認
         Subject isSubject = sDao.get(subjectCd, teacher.getSchool());
@@ -161,7 +161,7 @@ public class SubjectCreateExecuteAction extends Action {
             boolean end = sDao.save(makeSubject);
 
             if (end) {
-                req.getRequestDispatcher("student_create_done.jsp").forward(req, res);
+                req.getRequestDispatcher("subject_create_done.jsp").forward(req, res);
             } else {
                 System.out.println("★登録に失敗しました");
                 req.setAttribute("no", subjectCd);
