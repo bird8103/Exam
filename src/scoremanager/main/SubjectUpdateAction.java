@@ -20,7 +20,7 @@ public class SubjectUpdateAction extends Action {
         Subject thisSubject = null; // 科目情報受け取り用
 
         // リクエストパラメータの取得
-        subjectCode = req.getParameter("code");
+        subjectCode = req.getParameter("no");
 
         // 科目情報の取得
         thisSubject = subjectDao.get(subjectCode, teacher.getSchool());
