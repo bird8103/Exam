@@ -16,6 +16,9 @@ public class TestRegistExecuteAction extends Action {
 	@SuppressWarnings({ "null", "unchecked" })
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+//		HttpSession session = req.getSession(); // セッション
+//		Teacher teacher =(Teacher)session.getAttribute("user");
+
 		String pointNumStr="";
 		int pointNum=0;
 		Map<String,String> errors = new HashMap<>();// エラーメッセージ
@@ -24,12 +27,16 @@ public class TestRegistExecuteAction extends Action {
 
 		List<Test>  testScore = null; //更新・追加用
 		List<Test> students = null;   //受信用
-
+//		int no = (int)req.getAttribute("test_no");
+//		Subject subject = (Subject)req.getAttribute("subject_name");
+//		List<Student> stu_list = (List<Student>) req.getAttribute("studens");
+		students = (List<Test>)req.getAttribute("test_result");
         try {
-//        	studentsに検索結果に応じたtestを保存
-        	students = (List<Test>)req.getAttribute("test_result");
+//        	studentsに検索結果に応じたtestを保存したい
+//        	students =
 //        	1件ごとに処理
-        	for (Test test : students){
+        	 for(Test test : students){
+//        		 test = testDao.get(stu, subject, teacher.getSchool(), no);
             	pointNumStr = req.getParameter("point_" + test.getNo());
 
         		if(pointNumStr != null){
@@ -55,6 +62,14 @@ public class TestRegistExecuteAction extends Action {
             	}
         	}
 
+
+
+//			数字以外が入力された場合
+        } catch (NumberFormatException numberFormatException) {
+    		errors.put("point","0～100の範囲で入力してください");
+    		req.setAttribute("errors", errors);
+    		req.getRequestDispatcher("test_regist.jsp").forward(req, res);
+    	} finally{
 //        	入力された値のリストをまとめてDBに保存する
         	if(testDao.save(testScore) == true){
 //        		保存できた場合完了画面に遷移
@@ -63,12 +78,6 @@ public class TestRegistExecuteAction extends Action {
 //        		できなかった場合は遷移しない
               	req.getRequestDispatcher("test_regist.jsp").forward(req, res);
         	}
-
-//			数字以外が入力された場合
-        } catch (NumberFormatException numberFormatException) {
-    		errors.put("point","0～100の範囲で入力してください");
-    		req.setAttribute("errors", errors);
-    		req.getRequestDispatcher("test_regist.jsp").forward(req, res);
     	}
 	}
 }
