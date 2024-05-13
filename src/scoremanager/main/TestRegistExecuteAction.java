@@ -32,7 +32,7 @@ public class TestRegistExecuteAction extends Action {
 //		List<Student> stu_list = (List<Student>) req.getAttribute("studens");
 		students = (List<Test>)req.getAttribute("test_result");
         try {
-//        	studentsに検索結果に応じたtestを保存
+//        	studentsに検索結果に応じたtestを保存したい
 //        	students =
 //        	1件ごとに処理
         	 for(Test test : students){

@@ -40,7 +40,7 @@ pageEncoding="UTF-8"%>
 					</div>
 					<div class="col-4">
 						<label class="form-label" for="student-f3-select">科目</label>
-							<%--パラメーターf3が存在している場合 checkedを追記--%>
+							<%--パラメーターf3が存在している場合 checkedを追記---%>
 						<select class="form-select" id="student-f3-select" name="f3">
 							<option value="0">--------</option>
 							<c:forEach var="subject" items="${subject_set}">

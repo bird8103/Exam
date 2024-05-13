@@ -90,7 +90,7 @@ public class TestRegistAction extends Action {
 		subjectName=req.getParameter("f3");
 		numOfTime=req.getParameter("f4");
 
-//		入力値の型変換 なんかおかしい
+//		入力値の型変換 なんかおかしい-
 		subject=subjectDao.get(subjectName, teacher.getSchool());
 
 		if (entYearStr != null && !classNum.equals("0") && subject != null && !numOfTime.equals("0")){
