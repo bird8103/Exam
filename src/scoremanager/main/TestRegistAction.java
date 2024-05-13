@@ -35,7 +35,7 @@ public class TestRegistAction extends Action {
 		List<Subject> subjectList=subjectDao.filter(teacher.getSchool());
 
 		List<Integer> numSet= new ArrayList<>();
-		for (int i = 1; i < 101; i++){
+		for (int i = 1; i < 3; i++){
 			numSet.add(i);
 		}
 		// リストを初期化
