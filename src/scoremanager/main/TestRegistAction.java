@@ -61,6 +61,7 @@ public class TestRegistAction extends Action {
 		}
 	}
 
+	@SuppressWarnings("null")
 	private void TestRequestData(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		HttpSession session = req.getSession(); // セッション
 		Teacher teacher =(Teacher)session.getAttribute("user");
@@ -72,11 +73,13 @@ public class TestRegistAction extends Action {
 		int entYear=0;
 		int num=0;
 		boolean deployment = false;
-		List<Test> test = null;
-		Student students = null;
+		List<Test> testList = null;
+		List<Student> studentList = null;
+//		Student students = null;
 		Subject subject = new Subject();
 		TestDao testDao = new TestDao();
 		SubjectDao subjectDao = new SubjectDao();
+//		StudentDao studentDao = new StudentDao();
 		Map<String,String> errors = new HashMap<>(); // エラーメッセージ
 
 //		入力値の確認
@@ -93,13 +96,18 @@ public class TestRegistAction extends Action {
 
 		if (entYearStr != null && !classNum.equals("0") && subject != null && !numOfTime.equals("0")){
 		// 成績管理一覧で表示するために必要なデータを取得
-			test = testDao.filter(entYear, classNum, subject, num, teacher.getSchool());
-			students = ((Test) test).getStudent();
+			testList = testDao.filter(entYear, classNum, subject, num, teacher.getSchool());
+//			ここエラー　java.lang.ClassCastException　キャスト失敗
+			for(Test date : testList){
+//				students = studentDao.get((date.getStudent()).getNo());
+//				studentList.add(students);
+				studentList.add(date.getStudent());
+			}
 		// 値セット
-			req.setAttribute("test_result", test);
+			req.setAttribute("test_result", testList);
 			req.setAttribute("subject_name", subject);
 			req.setAttribute("test_no", num);
-			req.setAttribute("students", students);
+			req.setAttribute("students", studentList);
 			deployment = true;
 		}
 		else {
