@@ -71,7 +71,7 @@ pageEncoding="UTF-8"%>
 <!-- 検索結果 -->
  			<c:choose>
 					<c:when test="${dep == true}">
-						<div>科目 :${subject_name} : (:${test_no}回)</div>
+						<div>科目 :${subject_name.name} : (:${test_no}回)</div>
 						<table class="table table-hover">
 							<tr>
 								<th>入学年度</th>
@@ -96,7 +96,7 @@ pageEncoding="UTF-8"%>
 						</c:forEach>
 					</table>
 					<div class="col-2 text-center">
-					<button class="btn btn-secondary" id="exe-button">保存して終了</button>
+					<input type="button" class="btn btn-secondary" value="保存して終了" />
 					</div>
 				</c:when>
 			</c:choose>
