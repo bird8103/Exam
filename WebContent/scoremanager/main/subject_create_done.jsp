@@ -9,22 +9,6 @@
 <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-3">
-            <%-- サイドバー --%>
-            <ul class="nav nav-pills flex-column mb-auto px-4">
-                <li class="nav-item my-3"><a href="Menu.action">メニュー</a></li>
-                <li class="nav-item mb-3"><a href="StudentList.action">学生管理</a></li>
-                <li class="nav-item">成績管理</li>
-                <li class="nav-item mx-3 mb-3"><a href="TestRegist.action">成績登録</a></li>
-                <li class="nav-item mx-3 mb-3"><a href="TestList.action">成績参照</a></li>
-                <li class="nav-item mb-3"><a href="SubjectList.action">科目管理</a></li>
-            </ul>
-        </div>
-        <div class="col-md-9">
-            <%-- メインコンテンツ --%>
             <c:import url="/common/base.jsp">
                 <c:param name="title">得点管理システム</c:param>
                 <c:param name="scripts"></c:param>
@@ -41,19 +25,5 @@
                     </section>
                 </c:param>
             </c:import>
-        </div>
-    </div>
-    <%-- ナビゲーション --%>
-    <footer class="footer text-center mt-auto py-3">
-        <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-
-                </div>
-            </nav>
-        </div>
-    </footer>
-</div>
-
 </body>
 </html>

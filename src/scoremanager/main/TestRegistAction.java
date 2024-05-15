@@ -31,11 +31,15 @@ public class TestRegistAction extends Action {
 		ClassNumDao cNumDao = new ClassNumDao(); // クラス番号Dao
 		SubjectDao subjectDao = new SubjectDao(); //科目Dao
 
-		List<String> list=cNumDao.filter(teacher.getSchool());
-		List<Subject> subjectList=subjectDao.filter(teacher.getSchool());
+		//初期化
+		List<String> list=null;
+		List<Subject> subjectList=null;
+
+		list=cNumDao.filter(teacher.getSchool());
+		subjectList=subjectDao.filter(teacher.getSchool());
 
 		List<Integer> numSet= new ArrayList<>();
-		for (int i = 1; i < 101; i++){
+		for (int i = 1; i < 3; i++){
 			numSet.add(i);
 		}
 		// リストを初期化
@@ -55,12 +59,12 @@ public class TestRegistAction extends Action {
 		try{
 				TestRequestData(req, res);
 		} catch (NullPointerException e ){
-			req.getRequestDispatcher("test_regist.jsp").forward(req, res);
-		} catch (NumberFormatException nume){
+			System.out.println("検索が行われていません");
 			req.getRequestDispatcher("test_regist.jsp").forward(req, res);
 		}
 	}
 
+	@SuppressWarnings("null")
 	private void TestRequestData(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		HttpSession session = req.getSession(); // セッション
 		Teacher teacher =(Teacher)session.getAttribute("user");
@@ -72,8 +76,8 @@ public class TestRegistAction extends Action {
 		int entYear=0;
 		int num=0;
 		boolean deployment = false;
-		List<Test> test = null;
-		Student students = null;
+		List<Test> testList = null;
+		List<Student> studentList = null;
 		Subject subject = new Subject();
 		TestDao testDao = new TestDao();
 		SubjectDao subjectDao = new SubjectDao();
@@ -86,20 +90,27 @@ public class TestRegistAction extends Action {
 		subjectName=req.getParameter("f3");
 		numOfTime=req.getParameter("f4");
 
-//		入力値の型変換
-		entYear=Integer.parseInt(entYearStr);
-		num=Integer.parseInt(numOfTime);
+//		入力値の型変換 なんかおかしい-
 		subject=subjectDao.get(subjectName, teacher.getSchool());
 
 		if (entYearStr != null && !classNum.equals("0") && subject != null && !numOfTime.equals("0")){
+			entYear=Integer.parseInt(entYearStr);
+			num=Integer.parseInt(numOfTime);
+			System.out.println("変換OK");
 		// 成績管理一覧で表示するために必要なデータを取得
-			test = testDao.filter(entYear, classNum, subject, num, teacher.getSchool());
-			students = ((Test) test).getStudent();
+			testList = testDao.filter(entYear, classNum, subject, num, teacher.getSchool());
+			System.out.println("取得OK");
+//			ここエラー -- java.lang.ClassCastException --(キャスト失敗)直ってるような直ってないような
+			for(int j = 0; j < testList.size(); j++){
+				System.out.println();
+				studentList.add(testList.get(j).getStudent());
+			}
+			System.out.println("セット完了");
 		// 値セット
-			req.setAttribute("test_result", test);
+			req.setAttribute("test_result", testList);
 			req.setAttribute("subject_name", subject);
 			req.setAttribute("test_no", num);
-			req.setAttribute("students", students);
+			req.setAttribute("students", studentList);
 			deployment = true;
 		}
 		else {
@@ -107,6 +118,7 @@ public class TestRegistAction extends Action {
 			errors.put("all", "入学年度とクラスと科目と回数を選択してください");
 			req.setAttribute("errors", errors);
 		}
+		System.out.println(deployment);
 		req.setAttribute("dep", deployment);
 		req.getRequestDispatcher("test_regist.jsp").forward(req, res);
 	}

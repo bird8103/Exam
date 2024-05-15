@@ -40,7 +40,7 @@ pageEncoding="UTF-8"%>
 					</div>
 					<div class="col-4">
 						<label class="form-label" for="student-f3-select">科目</label>
-							<%--パラメーターf3が存在している場合 checkedを追記--%>
+							<%--パラメーターf3が存在している場合 checkedを追記---%>
 						<select class="form-select" id="student-f3-select" name="f3">
 							<option value="0">--------</option>
 							<c:forEach var="subject" items="${subject_set}">
@@ -63,13 +63,15 @@ pageEncoding="UTF-8"%>
 					<div class="col-2 text-center">
 						<button class="btn btn-secondary" id="filter-button">検索</button>
 					</div>
+
 					<div class="mt-2 text-warning">${errors.get("all")}</div>
+
 				</div>
 			</form>
 <!-- 検索結果 -->
  			<c:choose>
 					<c:when test="${dep == true}">
-						<div>科目 :${subject_name} : (:${test_no}回)</div>
+						<div>科目 :${subject_name.name} : (:${test_no}回)</div>
 						<table class="table table-hover">
 							<tr>
 								<th>入学年度</th>
@@ -94,7 +96,7 @@ pageEncoding="UTF-8"%>
 						</c:forEach>
 					</table>
 					<div class="col-2 text-center">
-					<button class="btn btn-secondary" id="exe-button">保存して終了</button>
+					<input type="button" class="btn btn-secondary" value="保存して終了" />
 					</div>
 				</c:when>
 			</c:choose>
