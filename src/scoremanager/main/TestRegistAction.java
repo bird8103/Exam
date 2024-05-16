@@ -35,36 +35,45 @@ public class TestRegistAction extends Action {
 		List<String> list=null;
 		List<Subject> subjectList=null;
 
-		list=cNumDao.filter(teacher.getSchool());
-		subjectList=subjectDao.filter(teacher.getSchool());
-
-		List<Integer> numSet= new ArrayList<>();
-		for (int i = 1; i < 3; i++){
-			numSet.add(i);
-		}
-		// リストを初期化
-		List<Integer> entYearSet=new ArrayList<>();
-		// 10年前から1年後までの年をリストに追加
-		for (int i = year-10;i<year+1;i++){
-			entYearSet.add(i);
-		}
-
-		// データをリクエストにセット
-		req.setAttribute("class_num_set", list);
-		req.setAttribute("ent_year_set", entYearSet);
-		req.setAttribute("subject_set", subjectList);
-		req.setAttribute("num_set", numSet);
-
-//		既に何らかが入力されている場合にそれに応じた処理を行う
 		try{
-				TestRequestData(req, res);
+
+			list=cNumDao.filter(teacher.getSchool());
+			subjectList=subjectDao.filter(teacher.getSchool());
+
+			List<Integer> numSet= new ArrayList<>();
+			for (int i = 1; i < 3; i++){
+				numSet.add(i);
+			}
+
+			// リストを初期化
+			List<Integer> entYearSet=new ArrayList<>();
+			// 10年前から1年後までの年をリストに追加
+			for (int i = year-10;i<year+1;i++){
+				entYearSet.add(i);
+			}
+
+			// データをリクエストにセット
+			req.setAttribute("class_num_set", list);
+			req.setAttribute("ent_year_set", entYearSet);
+			req.setAttribute("subject_set", subjectList);
+			req.setAttribute("num_set", numSet);
+
+//			Boolean ch = (Boolean)req.getAttribute("check");
+//			System.out.println("ch = " + ch);
+//			if (ch == null){
+//				req.setAttribute("check", clickCheck);
+//				System.out.println("変更: " + ch);
+//			}
+//			このページを呼び出した時の処理
+//			既に何らかが入力されている場合にそれに応じた処理を行う
+			TestRequestData(req, res);
+
 		} catch (NullPointerException e ){
-			System.out.println("検索が行われていません");
+			System.out.println("入力されていない項目を呼び出しています");
 			req.getRequestDispatcher("test_regist.jsp").forward(req, res);
 		}
 	}
 
-	@SuppressWarnings("null")
 	private void TestRequestData(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		HttpSession session = req.getSession(); // セッション
 		Teacher teacher =(Teacher)session.getAttribute("user");
@@ -76,8 +85,8 @@ public class TestRegistAction extends Action {
 		int entYear=0;
 		int num=0;
 		boolean deployment = false;
-		List<Test> testList = null;
-		List<Student> studentList = null;
+		List<Test> testList = new ArrayList<>();
+		List<Student> studentList = new ArrayList<>();
 		Subject subject = new Subject();
 		TestDao testDao = new TestDao();
 		SubjectDao subjectDao = new SubjectDao();
@@ -90,7 +99,7 @@ public class TestRegistAction extends Action {
 		subjectName=req.getParameter("f3");
 		numOfTime=req.getParameter("f4");
 
-//		入力値の型変換 なんかおかしい-
+//		入力値の型変換 直した
 		subject=subjectDao.get(subjectName, teacher.getSchool());
 
 		if (entYearStr != null && !classNum.equals("0") && subject != null && !numOfTime.equals("0")){
@@ -100,10 +109,13 @@ public class TestRegistAction extends Action {
 		// 成績管理一覧で表示するために必要なデータを取得
 			testList = testDao.filter(entYear, classNum, subject, num, teacher.getSchool());
 			System.out.println("取得OK");
-//			ここエラー -- java.lang.ClassCastException --(キャスト失敗)直ってるような直ってないような
+
+//			ここエラー 克服
 			for(int j = 0; j < testList.size(); j++){
-				System.out.println();
-				studentList.add(testList.get(j).getStudent());
+				Test test = testList.get(j);
+				Student student = test.getStudent();
+
+				studentList.add(student);
 			}
 			System.out.println("セット完了");
 		// 値セット
@@ -111,14 +123,19 @@ public class TestRegistAction extends Action {
 			req.setAttribute("subject_name", subject);
 			req.setAttribute("test_no", num);
 			req.setAttribute("students", studentList);
+
+	 		session.removeAttribute("test_data");
+	 		session.removeAttribute("student_data");
+			session.setAttribute("test_data", testList);
+			session.setAttribute("student_data", studentList);
 			deployment = true;
 		}
-		else {
+		else if (entYearStr != "" | !classNum.equals("0") | subject != null | !numOfTime.equals("0")){
 //		入学年度、クラス、科目、回数のいずれかが未入力の場合[入学年度とクラスと科目と回数を選択してください]と表示
 			errors.put("all", "入学年度とクラスと科目と回数を選択してください");
 			req.setAttribute("errors", errors);
 		}
-		System.out.println(deployment);
+
 		req.setAttribute("dep", deployment);
 		req.getRequestDispatcher("test_regist.jsp").forward(req, res);
 	}
