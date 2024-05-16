@@ -55,7 +55,7 @@ public class TestRegistExecuteAction extends Action {
         		}
 
 //        		入力された値が正しくない場合[0～100の範囲で入力してください]と表示
-            	if (pointNum < 100 && pointNumStr != null || pointNum < 0 && pointNumStr != null){
+            	if (pointNum > 100 && pointNumStr != null | pointNum < 0 && pointNumStr != null){
             		errors.put("point","0～100の範囲で入力してください");
             		req.setAttribute("errors", errors);
             	} else{
@@ -78,7 +78,6 @@ public class TestRegistExecuteAction extends Action {
 //         	入力された値のリストをまとめてDBに保存する
          	if(testDao.save(testScore) == true && testScore.size() ==testData.size()){
 //         		保存できた場合完了画面に遷移
-
          		System.out.println("DBへの保存に成功しました");
              	req.getRequestDispatcher("test_regist_done.jsp").forward(req, res);
          	} else{
