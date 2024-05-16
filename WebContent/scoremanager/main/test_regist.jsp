@@ -68,36 +68,39 @@ pageEncoding="UTF-8"%>
 
 				</div>
 			</form>
-<!-- 検索結果 -->
+<!-- 検索結果 <c:if test="${check==true}"></c:if>-->
  			<c:choose>
 					<c:when test="${dep == true}">
-						<div>科目 :${subject_name.name} : (:${test_no}回)</div>
+						<form action="TestRegistExecute.action"  method="get">
+						<div>科目 : ${subject_name.name} (${test_no}回)</div>
 						<table class="table table-hover">
 							<tr>
 								<th>入学年度</th>
+								<th>クラス </th>
 								<th>学生番号</th>
 								<th>氏名</th>
-								<th>クラス </th>
-								<th><label class="form-label" for="point">点数</label></th>
+								<th>点数</th>
 							</tr>
-							<c:forEach var="students" items="${students}">
+
+							<c:forEach var="student" items="${students}">
 							<tr>
 								<td>${student.entYear}</td>
+								<td>${student.classNum}</td>
 								<td>${student.no}</td>
 								<td>${student.name}</td>
-								<td>${student.classNum}</td>
 								<td>
 									<div class="col-6">
-										<input class="form-control" type="text" name="point_${student.no}" id="point" maxlength="3" required >
+										<input type="text" name="point_${student.no}" maxlength="3" <c:forEach var="score" items="${test_result}"><c:if test="${student.no==score.point}">value="${score.point}"</c:if></c:forEach>>
 									</div>
 									<c:if test="${errors.get(\"point\")}"><div class="col-16"><font color="FFD500">${errors.get("point")}</font></div></c:if>
 								</td>
 							</tr>
-						</c:forEach>
+							</c:forEach>
 					</table>
 					<div class="col-2 text-center">
-					<input type="button" class="btn btn-secondary" value="保存して終了" />
+					<input type="submit" class="btn btn-secondary px-1" id="end-button"  value="保存して終了" />
 					</div>
+					</form>
 				</c:when>
 			</c:choose>
 		</section>
