@@ -124,8 +124,11 @@ public class TestRegistAction extends Action {
 			req.setAttribute("test_no", num);
 			req.setAttribute("students", studentList);
 
-	 		session.removeAttribute("test_data");
-	 		session.removeAttribute("student_data");
+			if(session.getAttribute("test_data") != null | session.getAttribute("student_data") != null){
+				System.out.println("前の履歴を削除");
+				session.removeAttribute("test_data");
+				session.removeAttribute("student_data");
+			}
 			session.setAttribute("test_data", testList);
 			session.setAttribute("student_data", studentList);
 			deployment = true;
