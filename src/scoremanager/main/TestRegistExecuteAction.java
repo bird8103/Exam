@@ -1,5 +1,6 @@
 package scoremanager.main;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +21,6 @@ public class TestRegistExecuteAction extends Action {
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception{
 		HttpSession session = req.getSession(); // セッション
-//		Teacher teacher =(Teacher)session.getAttribute("user");
 
 		String pointNumStr="";
 		int pointNum=0;
@@ -31,15 +31,15 @@ public class TestRegistExecuteAction extends Action {
 		List<Test>  testData = new ArrayList<>();
 		List<Student> students = new ArrayList<>();   //受信用
 
-
-		testData = (List<Test>)session.getAttribute("test_data");
-		System.out.println("testData=" + testData);
-		students = (List<Student>)session.getAttribute("student_data");
-		System.out.println("students=" + students);
-
-		System.out.println("処理開始");
-
         try {
+
+        	testData = (List<Test>)session.getAttribute("test_data");
+        	System.out.println("testData=" + testData);
+        	students = (List<Student>)session.getAttribute("student_data");
+        	System.out.println("students=" + students);
+
+        	System.out.println("処理開始");
+
 //        	1件ごとに処理
         	 for(int i = 0; i < testData.size(); i++){
         		test = testData.get(i);
@@ -91,6 +91,9 @@ public class TestRegistExecuteAction extends Action {
     		errors.put("point","0～100の範囲で入力してください");
     		req.setAttribute("errors", errors);
     		System.out.println("戻る");
+    		req.getRequestDispatcher("TestRegist.action").forward(req, res);
+    	} catch (SQLException sqlexe){
+    		sqlexe.printStackTrace();
     		req.getRequestDispatcher("TestRegist.action").forward(req, res);
     	}
 	}

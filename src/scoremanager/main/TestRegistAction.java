@@ -118,11 +118,6 @@ public class TestRegistAction extends Action {
 				studentList.add(student);
 			}
 			System.out.println("セット完了");
-		// 値セット
-			req.setAttribute("test_result", testList);
-			req.setAttribute("subject_name", subject);
-			req.setAttribute("test_no", num);
-			req.setAttribute("students", studentList);
 
 			if(session.getAttribute("test_data") != null | session.getAttribute("student_data") != null){
 				System.out.println("前の履歴を削除");
@@ -131,8 +126,16 @@ public class TestRegistAction extends Action {
 			}
 			session.setAttribute("test_data", testList);
 			session.setAttribute("student_data", studentList);
+
+		// 値セット
+			req.setAttribute("test_result", testList);
+			req.setAttribute("subject_name", subject);
+			req.setAttribute("test_no", num);
+			req.setAttribute("students", studentList);
+
 			deployment = true;
 		}
+
 		else if (entYearStr != "" | !classNum.equals("0") | subject != null | !numOfTime.equals("0")){
 //		入学年度、クラス、科目、回数のいずれかが未入力の場合[入学年度とクラスと科目と回数を選択してください]と表示
 			errors.put("all", "入学年度とクラスと科目と回数を選択してください");

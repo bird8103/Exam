@@ -2,7 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <c:import url="/common/base.jsp">
 	<c:param name="title">
 		得点管理システム
@@ -90,7 +89,7 @@ pageEncoding="UTF-8"%>
 								<td>${student.name}</td>
 								<td>
 									<div class="col-6">
-										<input type="text" name="point_${student.no}" maxlength="3" <c:forEach var="score" items="${test_result}"><c:if test="${student.no==score.no}">value="${score.point}"</c:if></c:forEach>>
+										<input type="text" name="point_${student.no}" maxlength="3" <c:forEach var="score" items="${test_result}"><c:if test="${student.no==score.student.no && !empty score.point}">value="${score.point}"</c:if></c:forEach>>
 									</div>
 									<c:if test="${errors.get(\"point\")}"><div class="col-16"><font color="FFD500">${errors.get("point")}</font></div></c:if>
 								</td>
