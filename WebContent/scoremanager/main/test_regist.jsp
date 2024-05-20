@@ -67,7 +67,7 @@ pageEncoding="UTF-8"%>
 
 				</div>
 			</form>
-<!-- 検索結果 <c:if test="${check==true}"></c:if>-->
+<!-- 検索結果 -->
  			<c:choose>
 					<c:when test="${dep == true}">
 						<form action="TestRegistExecute.action"  method="get">
@@ -88,8 +88,21 @@ pageEncoding="UTF-8"%>
 								<td>${student.no}</td>
 								<td>${student.name}</td>
 								<td>
+								<%-- エラーはきまくりゾーン --%>
 									<div class="col-6">
-										<input type="text" name="point_${student.no}" maxlength="3" <c:forEach var="score" items="${test_result}"><c:if test="${student.no==score.student.no && !empty score.point}">value="${score.point}"</c:if></c:forEach>>
+										<input type="text" name="point_${student.no}" maxlength="3"
+											<c:forEach var="score" items="${test_result}">
+												<c:choose>
+												<c:when test="${student.no == score.student.no}">
+													<% System.out.println("一致する生徒番号を発見"); %>
+													<c:choose>
+														<c:when test="${!empty score.point}">value="${score.point}"</c:when>
+														<c:otherwise>value=""</c:otherwise>
+													</c:choose>
+												</c:when>
+													<c:otherwise><% System.out.println("不一致"); %></c:otherwise>
+												</c:choose>
+											</c:forEach>>
 									</div>
 									<c:if test="${errors.get(\"point\")}"><div class="col-16"><font color="FFD500">${errors.get("point")}</font></div></c:if>
 								</td>
