@@ -58,12 +58,7 @@ public class TestRegistAction extends Action {
 			req.setAttribute("subject_set", subjectList);
 			req.setAttribute("num_set", numSet);
 
-//			Boolean ch = (Boolean)req.getAttribute("check");
-//			System.out.println("ch = " + ch);
-//			if (ch == null){
-//				req.setAttribute("check", clickCheck);
-//				System.out.println("変更: " + ch);
-//			}
+
 //			このページを呼び出した時の処理
 //			既に何らかが入力されている場合にそれに応じた処理を行う
 			TestRequestData(req, res);

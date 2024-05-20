@@ -92,9 +92,10 @@ public class TestRegistExecuteAction extends Action {
     		req.setAttribute("errors", errors);
     		System.out.println("戻る");
     		req.getRequestDispatcher("TestRegist.action").forward(req, res);
+//    		Connection is null. (ただし更新はできる)の場合
     	} catch (SQLException sqlexe){
-    		sqlexe.printStackTrace();
-    		req.getRequestDispatcher("TestRegist.action").forward(req, res);
+    		System.out.println("いつもの");
+         	req.getRequestDispatcher("test_regist_done.jsp").forward(req, res);
     	}
 	}
 }
