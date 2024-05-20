@@ -154,11 +154,11 @@ public class TestDao extends Dao{
 		return list;
 	}
 	public boolean save(List<Test> list) throws Exception{
-		// コネクションを確立
-		Connection connection = getConnection();
 		int count = 0;
 		boolean success=false;
 		for (Test test: list){
+			// コネクションを確立
+			Connection connection = getConnection();
 			success=save(test,connection);
 			if (success==true){
 				count+=1;
