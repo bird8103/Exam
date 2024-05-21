@@ -84,7 +84,6 @@ public class TestRegistAction extends Action {
 		List<Test> testList = new ArrayList<>();
 		List<Test> tests = new ArrayList<>();
 
-		List<Student> oldStuList = new ArrayList<>();
 		List<Student> studentList = new ArrayList<>();
 		Subject subject = new Subject();
 		TestDao testDao = new TestDao();
@@ -112,66 +111,58 @@ public class TestRegistAction extends Action {
 
 			System.out.println(tests);
 
-			//生徒数分用意
+			//生徒数分用意(在学していない生徒を含む)
 			studentList = studentDao.filter(teacher.getSchool(), entYear, classNum, false);
-//			oldStuList = studentDao.filter(teacher.getSchool(), entYear, classNum, false);
 			System.out.println("取得OK");
+			System.out.println("List : " + studentList.size());
 
 //				生徒テーブルと照らし合わせ
-			//在学していない生徒を含む
-//				for(int j = 0; j < oldStuList.size(); j++){
-//					studentList.add(oldStuList.get(j));
-//					System.out.println("追加回数 : " + j + oldStuList.get(j).getName());
-//				}
 
-				System.out.println("List : " + studentList.size());
+			for(int j = 0; j < studentList.size(); j++){
+				Test test = new Test();
+				test.setNo(num);
+				test.setClassNum(classNum);
+				test.setStudent(studentList.get(j));
+				test.setSubject(subject);
+				test.setSchool(teacher.getSchool());
 
-				for(int j = 0; j < studentList.size(); j++){
-					Test test = new Test();
-					test.setNo(num);
-					test.setClassNum(classNum);
-					test.setStudent(studentList.get(j));
-					test.setSubject(subject);
-					test.setSchool(teacher.getSchool());
-
-					for(int i = 0; i < tests.size(); i++){
-						Test tes = tests.get(i);
-						//すでに得点テーブルに存在している場合
-						if(tes.getStudent().getNo() == studentList.get(j).getNo() && tes.getPoint() >= 0 ){
-							System.out.println(tes.getPoint());
-							System.out.println("すでに得点が入力されています");
-							test.setPoint(tes.getPoint());
-						}
+				for(int i = 0; i < tests.size(); i++){
+					Test tes = tests.get(i);
+					//すでに得点テーブルに存在している場合
+					if(tes.getStudent().getNo() == studentList.get(j).getNo() && tes.getPoint() >= 0 ){
+						System.out.println(tes.getPoint());
+						System.out.println("すでに得点が入力されています");
+						test.setPoint(tes.getPoint());
 					}
-
-					testList.add(test);
-					System.out.println("loop:" + j);
-
 				}
 
-				System.out.println("セット完了");
-//				以前のsessionデータが残っていた場合念のため削除
-				if(session.getAttribute("test_data") != null | session.getAttribute("student_data") != null){
-					System.out.println("前の履歴を削除");
-					session.removeAttribute("test_data");
-					session.removeAttribute("student_data");
-				}
+				testList.add(test);
+				System.out.println("loop : " + j + studentList.get(j).getName());
+			}
 
-				// 値セット
-				session.setAttribute("test_data", testList);
-				session.setAttribute("student_data", studentList);
+			System.out.println("セット完了");
+//			以前のsessionデータが残っていた場合念のため削除
+			if(session.getAttribute("test_data") != null | session.getAttribute("student_data") != null){
+				System.out.println("前の履歴を削除");
+				session.removeAttribute("test_data");
+				session.removeAttribute("student_data");
+			}
 
-				req.setAttribute("test_result", testList);
-				req.setAttribute("subject_name", subject);
-				req.setAttribute("test_no", num);
-				req.setAttribute("students", studentList);
+			// 値セット
+			session.setAttribute("test_data", testList);
+			session.setAttribute("student_data", studentList);
 
-				deployment = true;
+			req.setAttribute("test_result", testList);
+			req.setAttribute("subject_name", subject);
+			req.setAttribute("test_no", num);
+			req.setAttribute("students", studentList);
+
+			deployment = true;
 
 		}else if (entYearStr != "" | !classNum.equals("0") | subject != null | !numOfTime.equals("0")){
 //				入学年度、クラス、科目、回数のいずれかが未入力の場合[入学年度とクラスと科目と回数を選択してください]と表示
-					errors.put("all", "入学年度とクラスと科目と回数を選択してください");
-					req.setAttribute("errors", errors);
+			errors.put("all", "入学年度とクラスと科目と回数を選択してください");
+			req.setAttribute("errors", errors);
 		}
 
 		req.setAttribute("dep", deployment);
