@@ -7,8 +7,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sun.corba.se.impl.javax.rmi.CORBA.Util;
-
 import bean.School;
 import bean.Student;
 import bean.Subject;
@@ -21,7 +19,7 @@ import dao.SubjectDao;
 import dao.TestListStudentDao;
 import dao.TestListSubjectDao;
 import tool.Action;
-
+import tool.Util;
 
 public class TestListAction extends Action{
 
