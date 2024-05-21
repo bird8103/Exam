@@ -108,7 +108,6 @@ public class TestRegistAction extends Action {
 		// 成績管理一覧で表示するために必要なデータを取得
 			//得点取得
 			tests = testDao.filter(entYear, classNum, subject, num, teacher.getSchool());
-
 			System.out.println(tests);
 
 			//生徒数分用意(在学していない生徒を含む)
