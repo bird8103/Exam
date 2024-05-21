@@ -29,7 +29,7 @@ public class TestListAction extends Action{
 		String f = null;
 		f = req.getParameter("f");
 		Util util = new Util();
-		Teacher teacher = ((Object) util).getUser(req);
+		Teacher teacher = util.getUser(req);
 		ClassNumDao cDao = new ClassNumDao();
 		SubjectDao subjectDao = new SubjectDao();
 		LocalDate localDate = LocalDate.now();
