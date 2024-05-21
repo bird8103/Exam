@@ -98,7 +98,7 @@ public class TestRegistExecuteAction extends Action {
     		errors.put("point","0～100の範囲で入力してください");
     		req.setAttribute("errors", errors);
     		System.out.println("戻る");
-    		req.getRequestDispatcher("TestRegist.action").forward(req, res);
+    		req.getRequestDispatcher("test_regist.jsp").forward(req, res);
 //    		Connection is null. (ただし更新はできる)の場合
     	} catch (SQLException sqlexe){
     		System.out.println("いつもの");

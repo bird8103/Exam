@@ -20,11 +20,11 @@ pageEncoding="UTF-8"%>
 					<div class="col-2">
 						<label class="form-label" for="student-f1-select">入学年度</label>
 						<select class="form-select" id="student-f1-select" name="f1">
-							<option value="0">--------</option>
-							<c:forEach var="year" items="${ent_year_set}">
-								<%--現在のyear と選択されていたF1が一致していた場合 selectedを追記 --%>
-								<option value="${year}" <c:if test="${year==f1}">selected</c:if>>${year}</option>
-							</c:forEach>
+						<option value="0">--------</option>
+						<c:forEach var="year" items="${ent_year_set}">
+							<%--現在のyear と選択されていたF1が一致していた場合 selectedを追記 --%>
+							<option value="${year}" <c:if test="${year==f1}">selected</c:if>>${year}</option>
+						</c:forEach>
 						</select>
 					</div>
 					<div class="col-2">

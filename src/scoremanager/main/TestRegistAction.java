@@ -58,7 +58,7 @@ public class TestRegistAction extends Action {
 			req.setAttribute("ent_year_set", entYearSet);
 			req.setAttribute("subject_set", subjectList);
 			req.setAttribute("num_set", numSet);
-
+			req.setAttribute("start", false);
 
 //			このページを呼び出した時の処理
 //			既に何らかが入力されている場合にそれに応じた処理を行う
@@ -66,6 +66,7 @@ public class TestRegistAction extends Action {
 
 		} catch (NullPointerException e ){
 			System.out.println("入力されていない項目を呼び出しています");
+			req.setAttribute("start", true);
 			req.getRequestDispatcher("test_regist.jsp").forward(req, res);
 		}
 	}
@@ -108,7 +109,6 @@ public class TestRegistAction extends Action {
 		// 成績管理一覧で表示するために必要なデータを取得
 			//得点取得
 			tests = testDao.filter(entYear, classNum, subject, num, teacher.getSchool());
-
 			System.out.println(tests);
 
 			//生徒数分用意(在学していない生徒を含む)
@@ -156,6 +156,11 @@ public class TestRegistAction extends Action {
 			req.setAttribute("subject_name", subject);
 			req.setAttribute("test_no", num);
 			req.setAttribute("students", studentList);
+
+			req.setAttribute("f1", entYear);
+			req.setAttribute("f2", classNum);
+			req.setAttribute("f3", subjectName);
+			req.setAttribute("f4", num);
 
 			deployment = true;
 
