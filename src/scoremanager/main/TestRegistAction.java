@@ -15,6 +15,7 @@ import bean.Subject;
 import bean.Teacher;
 import bean.Test;
 import dao.ClassNumDao;
+import dao.StudentDao;
 import dao.SubjectDao;
 import dao.TestDao;
 import tool.Action;
@@ -81,9 +82,13 @@ public class TestRegistAction extends Action {
 		int num=0;
 		boolean deployment = false;
 		List<Test> testList = new ArrayList<>();
+		List<Test> tests = new ArrayList<>();
+
+		List<Student> oldStuList = new ArrayList<>();
 		List<Student> studentList = new ArrayList<>();
 		Subject subject = new Subject();
 		TestDao testDao = new TestDao();
+		StudentDao studentDao = new StudentDao();
 		SubjectDao subjectDao = new SubjectDao();
 		Map<String,String> errors = new HashMap<>(); // エラーメッセージ
 
@@ -102,39 +107,71 @@ public class TestRegistAction extends Action {
 			num=Integer.parseInt(numOfTime);
 			System.out.println("変換OK");
 		// 成績管理一覧で表示するために必要なデータを取得
-			testList = testDao.filter(entYear, classNum, subject, num, teacher.getSchool());
+			//得点取得
+			tests = testDao.filter(entYear, classNum, subject, num, teacher.getSchool());
+
+			System.out.println(tests);
+
+			//生徒数分用意
+			studentList = studentDao.filter(teacher.getSchool(), entYear, classNum, false);
+//			oldStuList = studentDao.filter(teacher.getSchool(), entYear, classNum, false);
 			System.out.println("取得OK");
 
-//			ここエラー 克服
-			for(int j = 0; j < testList.size(); j++){
-				Test test = testList.get(j);
-				Student student = test.getStudent();
+//				生徒テーブルと照らし合わせ
+			//在学していない生徒を含む
+//				for(int j = 0; j < oldStuList.size(); j++){
+//					studentList.add(oldStuList.get(j));
+//					System.out.println("追加回数 : " + j + oldStuList.get(j).getName());
+//				}
 
-				studentList.add(student);
-			}
-			System.out.println("セット完了");
+				System.out.println("List : " + studentList.size());
 
-			if(session.getAttribute("test_data") != null | session.getAttribute("student_data") != null){
-				System.out.println("前の履歴を削除");
-				session.removeAttribute("test_data");
-				session.removeAttribute("student_data");
-			}
-			session.setAttribute("test_data", testList);
-			session.setAttribute("student_data", studentList);
+				for(int j = 0; j < studentList.size(); j++){
+					Test test = new Test();
+					test.setNo(num);
+					test.setClassNum(classNum);
+					test.setStudent(studentList.get(j));
+					test.setSubject(subject);
+					test.setSchool(teacher.getSchool());
 
-		// 値セット
-			req.setAttribute("test_result", testList);
-			req.setAttribute("subject_name", subject);
-			req.setAttribute("test_no", num);
-			req.setAttribute("students", studentList);
+					for(int i = 0; i < tests.size(); i++){
+						Test tes = tests.get(i);
+						//すでに得点テーブルに存在している場合
+						if(tes.getStudent().getNo() == studentList.get(j).getNo() && tes.getPoint() >= 0 ){
+							System.out.println(tes.getPoint());
+							System.out.println("すでに得点が入力されています");
+							test.setPoint(tes.getPoint());
+						}
+					}
 
-			deployment = true;
-		}
+					testList.add(test);
+					System.out.println("loop:" + j);
 
-		else if (entYearStr != "" | !classNum.equals("0") | subject != null | !numOfTime.equals("0")){
-//		入学年度、クラス、科目、回数のいずれかが未入力の場合[入学年度とクラスと科目と回数を選択してください]と表示
-			errors.put("all", "入学年度とクラスと科目と回数を選択してください");
-			req.setAttribute("errors", errors);
+				}
+
+				System.out.println("セット完了");
+//				以前のsessionデータが残っていた場合念のため削除
+				if(session.getAttribute("test_data") != null | session.getAttribute("student_data") != null){
+					System.out.println("前の履歴を削除");
+					session.removeAttribute("test_data");
+					session.removeAttribute("student_data");
+				}
+
+				// 値セット
+				session.setAttribute("test_data", testList);
+				session.setAttribute("student_data", studentList);
+
+				req.setAttribute("test_result", testList);
+				req.setAttribute("subject_name", subject);
+				req.setAttribute("test_no", num);
+				req.setAttribute("students", studentList);
+
+				deployment = true;
+
+		}else if (entYearStr != "" | !classNum.equals("0") | subject != null | !numOfTime.equals("0")){
+//				入学年度、クラス、科目、回数のいずれかが未入力の場合[入学年度とクラスと科目と回数を選択してください]と表示
+					errors.put("all", "入学年度とクラスと科目と回数を選択してください");
+					req.setAttribute("errors", errors);
 		}
 
 		req.setAttribute("dep", deployment);

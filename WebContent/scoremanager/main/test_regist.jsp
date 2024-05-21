@@ -100,7 +100,7 @@ pageEncoding="UTF-8"%>
 														<c:otherwise>value=""</c:otherwise>
 													</c:choose>
 												</c:when>
-													<c:otherwise><% System.out.println("不一致"); %></c:otherwise>
+												<c:otherwise><% System.out.println("不一致"); %></c:otherwise>
 												</c:choose>
 											</c:forEach>>
 									</div>

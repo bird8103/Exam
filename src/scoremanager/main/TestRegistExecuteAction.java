@@ -27,7 +27,9 @@ public class TestRegistExecuteAction extends Action {
 		Test test = new Test();
 		Map<String,String> errors = new HashMap<>();// エラーメッセージ
 		TestDao testDao = new TestDao();
+
 		List<Test>  testScore = new ArrayList<>(); //更新・追加用
+
 		List<Test>  testData = new ArrayList<>();
 		List<Student> students = new ArrayList<>();   //受信用
 
@@ -42,13 +44,16 @@ public class TestRegistExecuteAction extends Action {
 
 //        	1件ごとに処理
         	 for(int i = 0; i < testData.size(); i++){
-        		test = testData.get(i);
+        		 Test rTest = new Test(); //初期化
+        		test = testData.get(i);      //データ取得
 
-        		String stuNo = students.get(i).getNo();
+        		String stuNo = students.get(i).getNo(); //生徒番号取得
             	pointNumStr = req.getParameter("point_" + stuNo);
+
         		System.out.println("pointNum変換:" + pointNumStr);
         		System.out.println("point_" + stuNo);
 
+        		//点数が入力されていた場合型変換
         		if(pointNumStr != ""){
             		System.out.println("intに変換");
                     pointNum = Integer.parseInt(pointNumStr);
@@ -61,15 +66,17 @@ public class TestRegistExecuteAction extends Action {
             	} else{
 //            		得点が入力されていた場合のみ
             		if(pointNumStr != ""){
-                		 test.setPoint(pointNum);
+                		 rTest.setPoint(pointNum);
             		}
-            		System.out.println(test.getNo());
-            		System.out.println(test.getClassNum());
-            		System.out.println(test.getPoint());
-            		System.out.println(test.getSubject());
-            		System.out.println(test.getStudent());
+            		rTest.setNo(test.getNo());
+            		rTest.setClassNum(test.getClassNum());
+            		rTest.setSubject(test.getSubject());
+            		rTest.setStudent(test.getStudent());
+            		rTest.setSchool(test.getSchool());
 
-            		testScore.add(test);
+            		System.out.println(rTest.getPoint());
+
+            		testScore.add(rTest);
             	}
         	}
 
