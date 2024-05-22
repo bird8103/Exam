@@ -53,13 +53,14 @@ public class TestRegistExecuteAction extends Action {
         		System.out.println("pointNum変換:" + pointNumStr);
         		System.out.println("point_" + stuNo);
 
+        		req.setAttribute("err_cou", stuNo);
         		//点数が入力されていた場合型変換
         		if(pointNumStr != ""){
             		System.out.println("intに変換");
                     pointNum = Integer.parseInt(pointNumStr);
         		}
 
-//        		入力された値が正しくない場合[0～100の範囲で入力してください]と表示
+//        		入力された値が0～100を超える場合[0～100の範囲で入力してください]と表示
             	if (pointNum > 100 && pointNumStr != null | pointNum < 0 && pointNumStr != null){
             		System.out.println("error >" + stuNo);
             		errors.put("point_" + stuNo,"0～100の範囲で入力してください");
@@ -106,12 +107,13 @@ public class TestRegistExecuteAction extends Action {
          	}
 
 //			数字以外が入力された場合
-        } catch (NumberFormatException numberFormatException) {
-//    		errors.put("point" ,"0～100の範囲で入力してください");
-//    		req.setAttribute("errors", errors);
+        } catch (NumberFormatException nfe) {
+        	String err = (String) req.getAttribute("err_cou");
+    		errors.put("point_" + err,"0～100の範囲で入力してください");
+    		req.setAttribute("errors", errors);
     		System.out.println("戻る");
     		req.setAttribute("dep", true);
-    		req.getRequestDispatcher("test_regist.jsp").forward(req, res);
+    		req.getRequestDispatcher("TestRegist.action").forward(req, res);
 //    		Connection is null. (ただし更新はできる)の場合
     	} catch (SQLException sqlexe){
     		System.out.println("いつもの");

@@ -104,7 +104,8 @@ pageEncoding="UTF-8"%>
 												</c:choose>
 											</c:forEach>>
 									</div>
-									<c:if test="${errors.get('point_\"${student.no}\"')!=null}"><div class="col-16"><font color="FFD500">${errors.get("point")}</font></div></c:if>
+									<c:set var="no" value="${student.no}" />
+									<c:if test="${errors.get('point_' + no)!=null}"><div class="col-16"><font color="FFD500">${errors.get("point")}</font></div></c:if>
 								</td>
 							</tr>
 							</c:forEach>
