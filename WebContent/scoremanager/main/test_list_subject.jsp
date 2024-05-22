@@ -11,15 +11,15 @@ pageEncoding="UTF-8"%>
 	<c:param name="scripts"></c:param>
 
 	<c:param name="content">
-		<section class="me-10">
+		<section class="me-4">
 			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-8">成績参照</h2>
 
-			<form method="get">
+
 				<div class="row border  mx--10 mb-3 py-2 align-items-center rounded" id="filter">
 
 
 <div class="col-3">科目情報</div>
-				<form method="POST">
+				<form action="TestListSubjectExecute.action" method="get">
 					<div class="col-2">
 					<label class="form-label" for="student-fl-select">入学年度</label>
 						<select class="form-select" id="student-fl-select" name="f1" required>
@@ -43,8 +43,6 @@ pageEncoding="UTF-8"%>
 					</div>
 
 
-
-
 					<div class="col-2">
 						<label class="form-label" for="student-f3-select">科目</label>
 						<select class="form-select" id="student-f3-select" name="f3" required>
@@ -62,7 +60,7 @@ pageEncoding="UTF-8"%>
 					</div>
 <div class="col-2" ><input type="button" name="STU_POST_GET" value="検索"></div>
 
-					<form method="POST">
+
 					<div class=" border-bottom  mb-2 py-2  align-items-center rounded" id="filter"></div>
 
 
@@ -80,7 +78,7 @@ pageEncoding="UTF-8"%>
 
 					</div>
 <div class="col-2"><input type="submit" name="STU_GET" value="検索"></div>
-
+</form>
 
 </div>
 
@@ -88,18 +86,15 @@ pageEncoding="UTF-8"%>
 					<div class="mt-2 text-warning">${errors.get("f1")}</div>
 
 
-			</form>
+
 
 			</section>
-
-
 
 
 
 					<div class="mt-2 text-warning">${errors.get("f1")}</div>
 
 
-			</form>
 			<c:choose>
 				<c:when test="${students.size()!=0}">
 					<div>科目:${students.size()}</div>
@@ -133,6 +128,6 @@ pageEncoding="UTF-8"%>
 					<div>学生情報が存在しませんでした</div>
 				</c:otherwise>
 			</c:choose>
-		</section>
+
 	</c:param>
 </c:import>
