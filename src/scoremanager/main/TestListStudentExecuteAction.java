@@ -48,7 +48,7 @@ public class TestListStudentExecuteAction extends Action{
 			entYearSet.add(i);
 		}
 		subject_set = SubDao.filter(teacher.getSchool());
-		req.setAttribute("class_num_set", class_num_list); //選択項目
+		req.setAttribute("class_num_set", class_num_list);
 		req.setAttribute("ent_year_set", entYearSet);
         req.setAttribute("subject_set", subject_set);
 		req.setAttribute("subject", A);
@@ -61,9 +61,9 @@ public class TestListStudentExecuteAction extends Action{
 			if (result == null){
 				req.getRequestDispatcher("test_list_student.jsp").forward(req, res);
 			}
-//			req.setAttribute("student_class", number.getClass());
-	//		req.setAttribute("student_no", number.getNo());
-	//		req.setAttribute("student_no", number.getNo());
+		req.setAttribute("student_class", number.getClass());
+		req.setAttribute("student_no", number.getNo());
+		req.setAttribute("student_no", number.getNo());
 			req.setAttribute("f", f);
 			req.getRequestDispatcher("test_list_student.jsp").forward(req, res);
 		}catch(Exception e){
