@@ -38,17 +38,17 @@ public class TestRegistAction extends Action {
 
 		try{
 //			以前のsessionデータが残っていた場合念のため削除
-			if(session.getAttribute("test_data") != null | session.getAttribute("student_data") != null){
-				System.out.println("前の履歴を削除");
-				session.removeAttribute("test_data");
-				session.removeAttribute("student_data");
-				session.removeAttribute("subject_name");
-				session.removeAttribute("test_no");
-				session.removeAttribute("f1");
-				session.removeAttribute("f2");
-				session.removeAttribute("f3");
-				session.removeAttribute("f4");
-			}
+//			if(session.getAttribute("test_data") != null | session.getAttribute("student_data") != null){
+//				System.out.println("前の履歴を削除");
+//				session.removeAttribute("test_data");
+//				session.removeAttribute("student_data");
+//				session.removeAttribute("subject_name");
+//				session.removeAttribute("test_no");
+//				session.removeAttribute("f1");
+//				session.removeAttribute("f2");
+//				session.removeAttribute("f3");
+//				session.removeAttribute("f4");
+//			}
 
 			list=cNumDao.filter(teacher.getSchool());
 			subjectList=subjectDao.filter(teacher.getSchool());
