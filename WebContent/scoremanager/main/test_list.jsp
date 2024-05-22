@@ -11,15 +11,15 @@ pageEncoding="UTF-8"%>
 	<c:param name="scripts"></c:param>
 
 	<c:param name="content">
-		<section class="me-10">
+		<section class="me-4">
 			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-8">成績参照</h2>
 
-			<form method="get">
+			<form action="TestList.action" method="get">
 				<div class="row border  mx--10 mb-3 py-2 align-items-center rounded" id="filter">
 
 
 <div class="col-3">科目情報</div>
-				<form method="POST">
+
 					<div class="col-2">
 					<label class="form-label" for="student-fl-select">入学年度</label>
 						<select class="form-select" id="student-fl-select" name="f1" required>
@@ -55,12 +55,10 @@ pageEncoding="UTF-8"%>
 						</select>
 
 
-
-
 					</div>
 <div class="col-2" ><input type="button" name="STU_POST_GET" value="検索"></div>
 
-					<form method="POST">
+
 					<div class=" border-bottom  mb-2 py-2  align-items-center rounded" id="filter"></div>
 
 

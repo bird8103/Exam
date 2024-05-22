@@ -20,7 +20,7 @@ import tool.Action;
 
 public class TestListSubjectExecuteAction extends Action{
 	public void execute(HttpServletRequest req, HttpServletResponse res)
-			throws Exception {// ユーザーデータを取得＆セレクトボックス用のクラスデータを取得
+			throws Exception {
 
 		HttpSession session = req.getSession();
 		Teacher teacher = (Teacher)session.getAttribute("user");
@@ -56,12 +56,12 @@ public class TestListSubjectExecuteAction extends Action{
 		try{
 			System.out.println("!");
 			req.setAttribute("f", f);
-			req.setAttribute("class_num_set", class_num_list); //選択項目
+			req.setAttribute("class_num_set", class_num_list);
 			req.setAttribute("ent_year_set", entYearSet);
 			req.setAttribute("subject_set", subject_set);
 			if ((subject_result.equals("")) || (subject_result==null) || (subject_result.size()==0)){
 					System.out.println("!!");
-//					throw new Exception();
+
 					req.setAttribute("error", "truesj");
 					req.getRequestDispatcher("test_list_student.jsp").forward(req, res);
 			}else{
