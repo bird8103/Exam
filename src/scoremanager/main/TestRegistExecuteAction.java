@@ -61,7 +61,8 @@ public class TestRegistExecuteAction extends Action {
 
 //        		入力された値が正しくない場合[0～100の範囲で入力してください]と表示
             	if (pointNum > 100 && pointNumStr != null | pointNum < 0 && pointNumStr != null){
-            		errors.put("point","0～100の範囲で入力してください");
+            		System.out.println("error >" + stuNo);
+            		errors.put("point_" + stuNo,"0～100の範囲で入力してください");
             		req.setAttribute("errors", errors);
             	} else{
 //            		得点が入力されていた場合のみ
@@ -86,6 +87,17 @@ public class TestRegistExecuteAction extends Action {
          	if(testDao.save(testScore) == true && testScore.size() ==testData.size()){
 //         		保存できた場合完了画面に遷移
          		System.out.println("DBへの保存に成功しました");
+    			if(session.getAttribute("test_data") != null | session.getAttribute("student_data") != null){
+    				System.out.println("前の履歴を削除");
+    				session.removeAttribute("test_data");
+    				session.removeAttribute("student_data");
+    				session.removeAttribute("subject_name");
+    				session.removeAttribute("test_no");
+    				session.removeAttribute("f1");
+    				session.removeAttribute("f2");
+    				session.removeAttribute("f3");
+    				session.removeAttribute("f4");
+    			}
              	req.getRequestDispatcher("test_regist_done.jsp").forward(req, res);
          	} else{
 //         		できなかった場合は遷移しない
@@ -95,9 +107,10 @@ public class TestRegistExecuteAction extends Action {
 
 //			数字以外が入力された場合
         } catch (NumberFormatException numberFormatException) {
-    		errors.put("point","0～100の範囲で入力してください");
-    		req.setAttribute("errors", errors);
+//    		errors.put("point" ,"0～100の範囲で入力してください");
+//    		req.setAttribute("errors", errors);
     		System.out.println("戻る");
+    		req.setAttribute("dep", true);
     		req.getRequestDispatcher("test_regist.jsp").forward(req, res);
 //    		Connection is null. (ただし更新はできる)の場合
     	} catch (SQLException sqlexe){

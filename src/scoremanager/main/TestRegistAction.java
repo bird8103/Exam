@@ -37,6 +37,18 @@ public class TestRegistAction extends Action {
 		List<Subject> subjectList=null;
 
 		try{
+//			以前のsessionデータが残っていた場合念のため削除
+			if(session.getAttribute("test_data") != null | session.getAttribute("student_data") != null){
+				System.out.println("前の履歴を削除");
+				session.removeAttribute("test_data");
+				session.removeAttribute("student_data");
+				session.removeAttribute("subject_name");
+				session.removeAttribute("test_no");
+				session.removeAttribute("f1");
+				session.removeAttribute("f2");
+				session.removeAttribute("f3");
+				session.removeAttribute("f4");
+			}
 
 			list=cNumDao.filter(teacher.getSchool());
 			subjectList=subjectDao.filter(teacher.getSchool());
@@ -141,26 +153,18 @@ public class TestRegistAction extends Action {
 			}
 
 			System.out.println("セット完了");
-//			以前のsessionデータが残っていた場合念のため削除
-			if(session.getAttribute("test_data") != null | session.getAttribute("student_data") != null){
-				System.out.println("前の履歴を削除");
-				session.removeAttribute("test_data");
-				session.removeAttribute("student_data");
-			}
 
 			// 値セット
 			session.setAttribute("test_data", testList);
 			session.setAttribute("student_data", studentList);
 
-			req.setAttribute("test_result", testList);
-			req.setAttribute("subject_name", subject);
-			req.setAttribute("test_no", num);
-			req.setAttribute("students", studentList);
+			session.setAttribute("subject_name", subject);
+			session.setAttribute("test_no", num);
 
-			req.setAttribute("f1", entYear);
-			req.setAttribute("f2", classNum);
-			req.setAttribute("f3", subjectName);
-			req.setAttribute("f4", num);
+			session.setAttribute("f1", entYear);
+			session.setAttribute("f2", classNum);
+			session.setAttribute("f3", subjectName);
+			session.setAttribute("f4", num);
 
 			deployment = true;
 

@@ -81,7 +81,7 @@ pageEncoding="UTF-8"%>
 								<th>点数</th>
 							</tr>
 
-							<c:forEach var="student" items="${students}">
+							<c:forEach var="student" items="${student_data}">
 							<tr>
 								<td>${student.entYear}</td>
 								<td>${student.classNum}</td>
@@ -91,7 +91,7 @@ pageEncoding="UTF-8"%>
 								<%-- エラーはきまくりゾーン --%>
 									<div class="col-6">
 										<input type="text" name="point_${student.no}" maxlength="3"
-											<c:forEach var="score" items="${test_result}">
+											<c:forEach var="score" items="${test_data}">
 												<c:choose>
 												<c:when test="${student.no == score.student.no}">
 													<% System.out.println("一致する生徒番号を発見"); %>
@@ -104,7 +104,7 @@ pageEncoding="UTF-8"%>
 												</c:choose>
 											</c:forEach>>
 									</div>
-									<c:if test="${errors.get(\"point\")}"><div class="col-16"><font color="FFD500">${errors.get("point")}</font></div></c:if>
+									<c:if test="${errors.get('point_\"${student.no}\"')!=null}"><div class="col-16"><font color="FFD500">${errors.get("point")}</font></div></c:if>
 								</td>
 							</tr>
 							</c:forEach>
